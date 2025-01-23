@@ -1,11 +1,11 @@
 import { initApp } from "./app/index.js";
-
+import { config } from "./config/config.js";
 
 const app = initApp();
 
-const PORT = 8080;
 
-const server = app.listen(PORT, ()=>{
-    console.info(`server is active listen on http://localhost:${PORT}`)
+
+const server = app.listen(config.PORT, ()=>{
+    console.info(`server is active listen on http://localhost:${config.PORT}`)
 })
 
