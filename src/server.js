@@ -1,4 +1,4 @@
-import { initApp } from "./app/index.js";
+import  initApp  from "./app/index.js";
 import { config } from "./config/config.js";
 
 const app = initApp();

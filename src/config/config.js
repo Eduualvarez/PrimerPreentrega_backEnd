@@ -10,3 +10,4 @@ export const config = {
   dirname: __dirname,
   PORT: 8080,
 }
+
