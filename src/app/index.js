@@ -9,8 +9,8 @@ import {ProductsRouter} from '../routes/products.js'
     app.use(express.urlencoded({ extended: true }))
 
     app.use('/api/products', ProductsRouter)
-   
-   
+   app.use('/api/products/:pid', ProductsRouter)
+   app.use('/products', ProductsRouter)
 
     return app
 };

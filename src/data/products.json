@@ -1,5 +1,23 @@
-[{
-    "nombre":"producto de prueba",
-    "precio":2000,
-    "id":"01"
-}]
+[
+	{
+		"nombre": "producto de prueba",
+		"precio": 2000,
+		"id": "01"
+	},
+	{
+		"nombre": "producto de prueba2",
+		"precio": 2000,
+		"id": "02"
+	},
+	{
+		"id": "fa84a2ba-19ba-492d-9446-28b3456f9ad9",
+		"title": "panDuro",
+		"description": "pan viejp",
+		"code": "hola",
+		"price": 123,
+		"status": true,
+		"stock": 15,
+		"category": "panaderia",
+		"thumbnails": []
+	}
+]

@@ -3,23 +3,10 @@ import path from 'path'
 import { config } from '../config/config.js';
 import fs from 'fs'
 import { v4 as uuidv4 } from 'uuid'
-import { type } from "os";
 
 
 
 
-// para tipar el objeto producto
-/*
-* @typedef {Object} product 
-* @property {string} title 
-* @property {string} description 
-* @property {string} code
-* @property {number} price 
-* @property {boolean} status 
-* @property {number} stock
-* @property {string} category
-* @property {array<string>} thumbnails
-*/
 
 
 export const ProductsRouter = Router();
@@ -39,7 +26,7 @@ ProductsRouter.get('/', async (req, res)=>{
 })
 
 ProductsRouter.post('/', async (req, res) => {
-    //Logica para generar el producto
+    
 
     // para tipar el objeto producto
     /** 
@@ -81,9 +68,26 @@ ProductsRouter.post('/', async (req, res) => {
       
         const productsStringified = JSON.stringify(products, null, '\t')
         await fs.promises.writeFile(pathToProducts, productsStringified)
-        res.send({ message: 'Producto creado', data: product })
+        res.status(200).send({ message: 'Producto creado', data: product })
         
     } catch (error) {
         res.status(400).send({mesagge:`error: ${error}`})
-    }
-  })
+    }});
+
+
+    //para obtener un producto solo mediante parametros 
+    ProductsRouter.get('/:pid', async (req, res)=>{
+      const paramsId = req.params.pid;
+    try {
+
+      let productsString = await fs.promises.readFile(pathToProducts, 'utf-8')
+      const products = JSON.parse(productsString)
+      
+      const productsFiltred = products.filter((product)=>product.id === paramsId)
+      if (productsFiltred.length === 0) {
+        res.status(404).send({ message: 'Producto no encontrado' });
+      } else {
+        res.status(200).send(productsFiltred[0]);  // Enviamos el primer producto encontrado
+      }
+    } catch (error) {
+      res.status(500).send({ message: `Error: ${error.message}` })}})
