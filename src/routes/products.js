@@ -77,17 +77,111 @@ ProductsRouter.post('/', async (req, res) => {
 
     //para obtener un producto solo mediante parametros 
     ProductsRouter.get('/:pid', async (req, res)=>{
-      const paramsId = req.params.pid;
+      const {pid} = req.params;
     try {
 
       let productsString = await fs.promises.readFile(pathToProducts, 'utf-8')
       const products = JSON.parse(productsString)
       
-      const productsFiltred = products.filter((product)=>product.id === paramsId)
+      const productsFiltred = products.filter((product)=>product.id === pid)
       if (productsFiltred.length === 0) {
         res.status(404).send({ message: 'Producto no encontrado' });
       } else {
         res.status(200).send(productsFiltred[0]);  // Enviamos el primer producto encontrado
       }
     } catch (error) {
-      res.status(500).send({ message: `Error: ${error.message}` })}})
+      res.status(500).send({ message: `Error: ${error}` })}})
+
+
+
+
+
+      //metodo patch
+
+      ProductsRouter.put(('/:pid'), async (req, res)=>{
+
+        const {pid}= req.params;
+
+        //primero buscamos el objeto con el id 
+        // que nos pasan por la url en el array de products,
+        //  hay que validar que exista
+        let productsString = await fs.promises.readFile(pathToProducts, 'utf-8')
+      const products = JSON.parse(productsString)
+   
+      
+      try {
+        // Leemos y parseamos el archivo de productos
+        let productsString = await fs.promises.readFile(pathToProducts, 'utf-8');
+        const products = JSON.parse(productsString);
+    
+        // Buscamos el producto que se quiere actualizar
+        const productToPatch = products.find((product) => product.id === pid);
+    
+        // Verificamos si el producto existe
+        if (!productToPatch) {
+          return res.status(404).json({ message: `Producto con ID ${pid} no encontrado` });
+        }
+    
+        // Validamos los datos que vienen en el cuerpo de la solicitud
+        const { title, description, code, price, status, stock, category, thumbnails } = req.body;
+        if (!title || !description || !code || !price || !status || !stock || !category || !thumbnails) {
+          return res.status(400).json({ message: 'Todos los campos deben ser proporcionados' });
+        }
+    
+        // Actualizamos el producto con los nuevos datos
+        const updatedProduct = {
+          id: pid, // Mantenemos el mismo ID
+          title,
+          description,
+          code,
+          price,
+          status,
+          stock,
+          category,
+          thumbnails,
+        };
+    
+        // Reemplazamos el producto en la lista
+        const updatedProducts = products.map((product) =>
+          product.id === pid ? updatedProduct : product
+        );
+    
+        // Escribimos la lista de productos actualizada en el archivo
+        await fs.promises.writeFile(pathToProducts, JSON.stringify(updatedProducts, null, 2));
+    
+        // Respondemos con éxito
+        res.status(200).json({ product: updatedProduct, message: 'Producto actualizado' });
+      } catch (error) 
+      {
+        res.status(500).json({ message: 'Error al actualizar el producto. Intente nuevamente más tarde.' });
+      }
+    
+      })
+
+      //metodo delete 
+      ProductsRouter.delete('/:pid', async (req, res)=>{
+        const {pid} = req.params;
+      try {
+  
+        let productsString = await fs.promises.readFile(pathToProducts, 'utf-8')
+        const products = JSON.parse(productsString)
+       
+        const productToDelete = products.find((product)=>product.id===pid)
+
+        if (!productToDelete) {
+          return res.status(404).json({ message: `Producto con ID ${pid} no encontrado` });
+        }
+   
+        const updatedProducts = products.filter((product) => product.id !== pid);
+
+ 
+        await fs.promises.writeFile(pathToProducts, JSON.stringify(updatedProducts, null, 2));
+
+    
+        res.status(200).json({ message: 'Producto eliminado con éxito' });
+
+        
+      } catch (error) {
+        res.status(500).send({ message: `Error: ${error}` })}})
+        
+        

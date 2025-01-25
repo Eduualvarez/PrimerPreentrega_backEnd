@@ -1,5 +1,6 @@
 import express from 'express';
 import {ProductsRouter} from '../routes/products.js'
+import { CartsRouter } from '../routes/carts.js';
 
  const initApp = ()=>{
 
@@ -10,8 +11,7 @@ import {ProductsRouter} from '../routes/products.js'
 
     app.use('/api/products', ProductsRouter)
    app.use('/api/products/:pid', ProductsRouter)
-   app.use('/products', ProductsRouter)
-
+  app.use('/api/carts', CartsRouter)
     return app
 };
 
