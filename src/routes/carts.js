@@ -97,18 +97,3 @@ CartsRouter.post('/:cid/products/:pid', async (req, res)=>{
                         }})  
 
 
-
-                        /** if(cartById.products.find((id)=>id===pid)){
-
-                          cartById.push(productById.id)
-                          const productByIdSTR = JSON.stringify(productById, null, '\t')
-                          await fs.promises.writeFile(pathToCarts, productByIdSTR)
-                          res.status(200).json('producto anadido con exito')
-                      }
-                      else{
-                          
-                        const productTo_Increment_Quantity = productById.quantiity += 1;
-                        const productByIdSTR = JSON.stringify(productTo_Increment_Quantity, null, '\t')
-                          await fs.promises.writeFile(pathToProducts, productByIdSTR)
-                          res.status(200).json('producto incrementado con exito')
-                      } */
