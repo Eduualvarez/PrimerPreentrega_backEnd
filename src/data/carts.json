@@ -1,6 +1,11 @@
 [
   {
     "id": "a2d3227f-b560-4436-b38b-39060062f43a",
-    "products": []
+    "products": [
+      {
+        "id": "396b719a-e20f-48d4-b810-e98390c2a6ff",
+        "quantity": 5
+      }
+    ]
   }
 ]

@@ -4,14 +4,14 @@ import { config } from '../config/config.js';
 import fs from 'fs'
 import { v4 as uuidv4 } from 'uuid'
 
-
-
-
-
-
 export const ProductsRouter = Router();
 
-const pathToProducts = path.join(config.dirname, './src/data/products.json');
+export const pathToProducts = path.join(config.dirname, './src/data/products.json');
+
+
+
+
+
 
 ProductsRouter.get('/', async (req, res)=>{
   try {
@@ -39,6 +39,7 @@ ProductsRouter.post('/', async (req, res) => {
     * @property {number} stock
     * @property {string} category
     * @property {array<string>} thumbnails
+    * @property {number} quantity
     */
     try {
         let productsString = await fs.promises.readFile(pathToProducts, 'utf-8')
@@ -102,11 +103,6 @@ ProductsRouter.post('/', async (req, res) => {
 
         const {pid}= req.params;
 
-        //primero buscamos el objeto con el id 
-        // que nos pasan por la url en el array de products,
-        //  hay que validar que exista
-        let productsString = await fs.promises.readFile(pathToProducts, 'utf-8')
-      const products = JSON.parse(productsString)
    
       
       try {

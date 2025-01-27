@@ -38,5 +38,16 @@
     "nombre": "producto de prueba8",
     "precio": 2000,
     "id": "08"
+  },
+  {
+    "id": "396b719a-e20f-48d4-b810-e98390c2a6ff",
+    "title": "flauta vieja",
+    "description": "pan",
+    "code": "123",
+    "price": 555,
+    "status": true,
+    "stock": 600,
+    "category": "comestibles",
+    "thumbnails": []
   }
 ]
