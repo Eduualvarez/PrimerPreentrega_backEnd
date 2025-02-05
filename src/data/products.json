@@ -1,13 +1,16 @@
 [
   {
-    "id": "396b719a-e20f-48d4-b810-e98390c2a6ff",
-    "title": "flauta vieja",
-    "description": "pan",
-    "code": "123",
-    "price": 555,
+    "id": "4e8df94a-f24f-4ee0-83ef-581e209e0f0b",
+    "title": "papas",
+    "description": "papas crudas",
+    "code": "12553",
+    "price": 5845,
     "status": true,
-    "stock": 600,
+    "stock": 60,
     "category": "comestibles",
-    "thumbnails": []
+    "thumbnails": [
+      "prueba1",
+      "prueba2"
+    ]
   }
 ]
